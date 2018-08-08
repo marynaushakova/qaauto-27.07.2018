@@ -4,22 +4,45 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import static java.lang.Thread.sleep;
 
 public class LinkedInLoginTests {
+    WebDriver browser;
+
+    @BeforeMethod
+    public void beforeMethod (){
+        browser = new FirefoxDriver();
+        browser.get("https://www.linkedin.com/");
+    }
+    @AfterMethod
+    public void afterMethod () {
+        browser.close();
+    }
 
     @Test
-    public void successfulLoginTest () {
-//HomeWork: write Successful login test +3 validations: page url, title is new, check webelement that exist only on success login page.
+    public void successfulLoginTest () throws InterruptedException {
+        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(browser);
+        linkedInLoginPage.login("mf689799@gmail.com", "Miriam123");
 
+        sleep (5000);
+
+        String urlAfterSuccessLogin = browser.getCurrentUrl();
+        String title = browser.getTitle();
+        WebElement inputFind = browser.findElement(By.xpath("//input[@role='combobox']"));
+        WebElement itemTitle = browser.findElement(By.xpath ("//*[@id='profile-nav-item']"));
+
+        Assert.assertEquals (urlAfterSuccessLogin, "https://www.linkedin.com/feed/", "Incorrect URL");
+        Assert.assertEquals (title, "LinkedIn", "Home page title is wrong");
+        Assert.assertTrue(inputFind.isDisplayed());
+        Assert.assertEquals(itemTitle.isDisplayed(), true);
     }
 
     @Test
     public void negativeLoginTest () throws InterruptedException {
-        WebDriver browser = new FirefoxDriver();
-        browser.get("https://www.linkedin.com/");
+
         WebElement userEmailField = browser.findElement(By.xpath("//*[@id=\"login-email\"]"));
         WebElement userPassword = browser.findElement(By.xpath("//*[@id=\"login-password\"]"));
         WebElement signInButton = browser.findElement(By.xpath("//*[@id=\"login-submit\"]"));
@@ -35,3 +58,4 @@ public class LinkedInLoginTests {
 
     }
 }
+
