@@ -11,50 +11,37 @@ import static java.lang.Thread.sleep;
 
 public class LinkedInLoginTests {
     WebDriver browser;
+    LinkedInLoginPage linkedInLoginPage;
 
     @BeforeMethod
     public void beforeMethod (){
         browser = new FirefoxDriver();
         browser.get("https://www.linkedin.com/");
+        linkedInLoginPage = new LinkedInLoginPage(browser);
     }
+
     @AfterMethod
     public void afterMethod (){browser.close();
     }
-   @Test
-    public void successfulLoginTest () throws InterruptedException {
 
-        LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(browser);
-        linkedInLoginPage.login("mf689799@gmail.com", "Miriam123");
-
-        sleep (5000);
-
-        LinkedInHomePage linkedInHomePage = new LinkedInHomePage(browser);
-        linkedInHomePage.isProfileNavigationItemDisplayed();
-
-        String urlAfterSuccessLogin = browser.getCurrentUrl();
-        String title = browser.getTitle();
-
-        Assert.assertEquals (urlAfterSuccessLogin, "https://www.linkedin.com/feed/", "Incorrect URL");
-        Assert.assertEquals (title, "LinkedIn", "Home page title is wrong");
-
-        Assert.assertTrue(linkedInHomePage.isProfileNavigationItemDisplayed());
-    }
     @Test
-    public void negativeLoginTest () throws InterruptedException {
+    public void successfulLoginTest () {
 
-        WebElement userEmailField = browser.findElement(By.xpath("//*[@id=\"login-email\"]"));
-        WebElement userPassword = browser.findElement(By.xpath("//*[@id=\"login-password\"]"));
-        WebElement signInButton = browser.findElement(By.xpath("//*[@id=\"login-submit\"]"));
+        linkedInLoginPage.login("mf689799@gmail.com", "Miriam123");
+        LinkedInHomePage linkedInHomePage = new LinkedInHomePage(browser);
+        Assert.assertTrue(linkedInHomePage.isLoaded(), "Home page is not loaded");
+    }
 
-        userEmailField.sendKeys("abc.i");
-        userPassword.sendKeys("wrong");
-        signInButton.sendKeys(Keys.ENTER);
+    @Test
+    public void negativeLoginTest () {
 
-        sleep (3000);
+        linkedInLoginPage.login("abc.i", "wrong");
+        LinkedInLoginSubmitPage linkedInLoginSubmitPage = new LinkedInLoginSubmitPage(browser);
+        Assert.assertEquals (linkedInLoginSubmitPage.getAlertBoxText(),
+                "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.",
+                "Alert box has incorrect message");
 
-        WebElement alertBox = browser.findElement(By.xpath("//*[@role='alert']"));
-        Assert.assertEquals (alertBox.getText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert box has incorrect message");
-
+        //home task - add all possible negative tests
     }
 }
 
