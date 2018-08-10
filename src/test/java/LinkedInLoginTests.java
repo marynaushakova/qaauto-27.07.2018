@@ -18,28 +18,27 @@ public class LinkedInLoginTests {
         browser.get("https://www.linkedin.com/");
     }
     @AfterMethod
-    public void afterMethod () {
-        browser.close();
+    public void afterMethod (){browser.close();
     }
-
-    @Test
+   @Test
     public void successfulLoginTest () throws InterruptedException {
+
         LinkedInLoginPage linkedInLoginPage = new LinkedInLoginPage(browser);
         linkedInLoginPage.login("mf689799@gmail.com", "Miriam123");
 
         sleep (5000);
 
+        LinkedInHomePage linkedInHomePage = new LinkedInHomePage(browser);
+        linkedInHomePage.isProfileNavigationItemDisplayed();
+
         String urlAfterSuccessLogin = browser.getCurrentUrl();
         String title = browser.getTitle();
-        WebElement inputFind = browser.findElement(By.xpath("//input[@role='combobox']"));
-        WebElement itemTitle = browser.findElement(By.xpath ("//*[@id='profile-nav-item']"));
 
         Assert.assertEquals (urlAfterSuccessLogin, "https://www.linkedin.com/feed/", "Incorrect URL");
         Assert.assertEquals (title, "LinkedIn", "Home page title is wrong");
-        Assert.assertTrue(inputFind.isDisplayed());
-        Assert.assertEquals(itemTitle.isDisplayed(), true);
-    }
 
+        Assert.assertTrue(linkedInHomePage.isProfileNavigationItemDisplayed());
+    }
     @Test
     public void negativeLoginTest () throws InterruptedException {
 
