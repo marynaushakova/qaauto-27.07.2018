@@ -21,6 +21,7 @@ public class LinkedInHomePage {
     public String getCurrentPageURL() {
         return browser.getCurrentUrl();
     }
+
     public boolean isLoaded() {
         return profileNavigationItem.isDisplayed()
                 && getCurrentPageTitle().contains("LinkedIn")
