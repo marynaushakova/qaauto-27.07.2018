@@ -1,7 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -90,9 +87,28 @@ public class LinkedInLoginTests {
                 "Alert box has incorrect message when Wrong Email And Correct Pass are set");
     }
      //HomeWork describe data provider for next combinations
-    @Test
-    public void validateShortUserEmailAndPassword (){
-        linkedInLoginPage.login("a", "a");
+
+      @DataProvider
+     public Object[][] wrongUserEmailAndPasswordCombinations() {
+     return new Object[][]{
+              {"a", "1", "Слишком короткий текст (минимальная длина – 3 симв., введено – 1 симв.).", "Пароль должен содержать не менее 6 символов."},
+              {"MF689799@GMAIL.COM", "MIRIAM123", "", "Это неверный пароль. Повторите попытку или измените пароль."},
+              {"1","1111111111111", "Обязательно включите в номер значок «+» и код своей страны.", ""},
+              {"qwertyuiop", "qwertyuiop", "Укажите действительный адрес эл. почты.", ""},
+              {"qwertyuiop@bla.bla", "qwertyuiop", "Этот адрес эл. почты не зарегистрирован в LinkedIn. Повторите попытку.", ""},
+              {"qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop" +
+                   "qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop" +
+                   "qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop",
+                   "qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop",
+                   "Слишком длинный текст: максимальная длина – 128 симв., введено 150 симв.", ""},
+           //   {"qwertyuiop@bla.bla","", "","Пароль должен содержать не более 400 символов." }
+        };
+    }
+
+
+    @Test (dataProvider = "wrongUserEmailAndPasswordCombinations")
+    public void validateWrongUserEmailAndPassword (String userEmail, String userPass, String userEmailValidationText, String userPasValidationText ){
+        linkedInLoginPage.login(userEmail,userPass);
         LinkedInLoginSubmitPage linkedInLoginSubmitPage = new LinkedInLoginSubmitPage(browser);
         Assert.assertTrue(linkedInLoginSubmitPage.isLoaded(), "User is not on LoginSubmit page.");
 
@@ -101,11 +117,11 @@ public class LinkedInLoginTests {
                 "Alert box has incorrect message when Short Email And Pass are set");
 
         Assert.assertEquals(linkedInLoginSubmitPage.getUserEmailValidationText(),
-                "Слишком короткий текст (минимальная длина – 3 симв., введено – 1 симв.).",
+                userEmailValidationText,
                 "User Email Validation Field has wrong message text");
 
-        Assert.assertEquals(linkedInLoginSubmitPage.getUserPasswortValidationText(),
-                "Пароль должен содержать не менее 6 символов.",
+        Assert.assertEquals(linkedInLoginSubmitPage.getUserPasswordValidationText(),
+                userPasValidationText,
                 "User Password Validation Field has wrong message text");
     }
 }

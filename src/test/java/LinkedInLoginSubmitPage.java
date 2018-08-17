@@ -38,7 +38,7 @@ public class LinkedInLoginSubmitPage {
     public String getUserEmailValidationText() {
         return userEmailValidationText.getText();
     }
-    public String getUserPasswortValidationText() {
+    public String getUserPasswordValidationText() {
         return userPasswordValidationText.getText();
     }
 }
