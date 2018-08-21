@@ -1,18 +1,19 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LinkedInHomePage extends BasePage {
+
+    @FindBy(xpath ="//*[@id='profile-nav-item']" )
     private WebElement profileNavigationItem;
 
     public LinkedInHomePage(WebDriver browser) {
         this.browser = browser;
-        initElements();
+        PageFactory.initElements(browser, this);
     }
 
-    private void initElements() {
-        profileNavigationItem = browser.findElement(By.xpath("//*[@id='profile-nav-item']"));
-    }
     public boolean isLoaded() {
         return profileNavigationItem.isDisplayed()
                 && getCurrentPageTitle().contains("LinkedIn")

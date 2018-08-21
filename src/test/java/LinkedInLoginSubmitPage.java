@@ -1,25 +1,27 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LinkedInLoginSubmitPage extends BasePage {
+    @FindBy(xpath ="//*[@role='alert']" )
     private WebElement alertBox;
+
+    @FindBy(xpath ="//*[@id='session_key-login-error']" )
     private WebElement userEmailValidationText;
+
+    @FindBy(xpath ="//*[@id='session_password-login-error']" )
     private WebElement userPasswordValidationText;
 
     public LinkedInLoginSubmitPage(WebDriver browser){
         this.browser = browser;
-        initElements();
+        PageFactory.initElements(browser, this);
     }
-    private void initElements (){
-        alertBox = browser.findElement(By.xpath("//*[@role='alert']"));
-        userEmailValidationText = browser.findElement(By.xpath("//*[@id='session_key-login-error']"));
-        userPasswordValidationText = browser.findElement(By.xpath("//*[@id='session_password-login-error']"));
-    }
+
     public String getAlertBoxText() {
         return alertBox.getText();
     }
-
     public boolean isLoaded() {
         return alertBox.isDisplayed()
                 && getCurrentPageTitle().contains("Войти в LinkedIn")
@@ -27,9 +29,11 @@ public class LinkedInLoginSubmitPage extends BasePage {
     }
 
     public String getUserEmailValidationText() {
+
         return userEmailValidationText.getText();
     }
     public String getUserPasswordValidationText() {
+
         return userPasswordValidationText.getText();
     }
 }
