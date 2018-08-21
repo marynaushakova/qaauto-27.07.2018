@@ -2,11 +2,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import java.util.List;
 
 public class LinkedInSearchPage extends BasePage {
+    @FindBy(xpath = "//li[contains(@class, 'search-result__occluded-item')]")
+    private List<WebElement> searchResults;
 
-    @FindBy(xpath ="//div[@class='search-results-page core-rail']" )
-    private WebElement searchResultsElement;
+    @FindBy(xpath ="//h3[contains(@class, 'search-results__total')]" )
+    private WebElement searchResultsTotal;
 
     public LinkedInSearchPage(WebDriver browser) {
         this.browser = browser;
@@ -14,8 +17,12 @@ public class LinkedInSearchPage extends BasePage {
     }
 
     public boolean isLoaded() {
-        return searchResultsElement.isDisplayed()
+        return searchResultsTotal.isDisplayed()
                 && getCurrentPageTitle().contains("| Поиск | LinkedIn")
-                && getCurrentPageURL().equals("https://www.linkedin.com/search/results/index/?keywords=hr&origin=GLOBAL_SEARCH_HEADER");
+                && getCurrentPageURL().contains("/search/results/");
+    }
+
+    public int getSearchResultsCount() {
+        return searchResults.size();
     }
 }
