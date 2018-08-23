@@ -16,6 +16,9 @@ public class LinkedInLoginPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"login-submit\"]")
     private WebElement signInButton;
 
+    @FindBy(xpath = "//a[@class= 'link-forgot-password']")
+    private WebElement linkForgotPassword;
+
     public LinkedInLoginPage (WebDriver browser){
         this.browser = browser;
         PageFactory.initElements(browser, this);
@@ -55,6 +58,15 @@ public class LinkedInLoginPage extends BasePage {
             e.printStackTrace();
         }
         return new LinkedInLoginPage(browser) ;
+    }
+    public LinkedInResetPasswordPage loginReturnResetPasswordPage () {
+        linkForgotPassword.click();
+            try {
+            sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedInResetPasswordPage(browser) ;
     }
 
     public boolean isLoaded() {

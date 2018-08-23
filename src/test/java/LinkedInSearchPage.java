@@ -23,6 +23,7 @@ public class LinkedInSearchPage extends BasePage {
     }
 
     public int getSearchResultsCount() {
+
         return searchResults.size();
     }
 }
