@@ -59,14 +59,9 @@ public class LinkedInLoginPage extends BasePage {
         }
         return new LinkedInLoginPage(browser) ;
     }
-    public LinkedInResetPasswordPage loginReturnResetPasswordPage () {
+    public LinkedInRequestPasswordResetPage clickOnForgotPasswordLink() {
         linkForgotPassword.click();
-            try {
-            sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new LinkedInResetPasswordPage(browser) ;
+        return new LinkedInRequestPasswordResetPage(browser) ;
     }
 
     public boolean isLoaded() {

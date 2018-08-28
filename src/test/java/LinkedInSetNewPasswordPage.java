@@ -5,7 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
-public class LinkedInResetPasswordConfirmationPage extends BasePage {
+public class LinkedInSetNewPasswordPage extends BasePage {
     @FindBy(xpath = "//input[@name='newPassword']")
     private WebElement newPasswordField;
 
@@ -15,7 +15,7 @@ public class LinkedInResetPasswordConfirmationPage extends BasePage {
     @FindBy(xpath = "//button[@id='reset-password-submit-button']")
     private WebElement newPasswordConfirmButton;
 
-    public LinkedInResetPasswordConfirmationPage (WebDriver browser){
+    public LinkedInSetNewPasswordPage(WebDriver browser){
         this.browser = browser;
         PageFactory.initElements(browser, this);
     }
