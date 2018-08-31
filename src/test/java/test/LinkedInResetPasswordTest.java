@@ -1,9 +1,12 @@
+package test;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import page.*;
 
 import static java.lang.Thread.sleep;
 
@@ -24,24 +27,25 @@ public class LinkedInResetPasswordTest {
     @Test
     public void successfulLinkedInResetPasswordTest(){
         LinkedInRequestPasswordResetPage linkedInRequestPasswordResetPage = linkedInLoginPage.clickOnForgotPasswordLink();
-            Assert.assertTrue(linkedInRequestPasswordResetPage.isLoaded(), "RequestPasswordReset page is not loaded");
+            Assert.assertTrue(linkedInRequestPasswordResetPage.isLoaded(), "RequestPasswordResetPage is not loaded");
 
         LinkedInPasswordResetSubmitPage linkedInPasswordResetSubmitPage = linkedInRequestPasswordResetPage.clickOnFindAccount("mf689799@gmail.com");
-
         try {
-            sleep(120000);
+            sleep(180000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Assert.assertTrue(linkedInPasswordResetSubmitPage.isLoaded(), "Reset password request page is not loaded");
+
+        Assert.assertTrue(linkedInPasswordResetSubmitPage.isLoaded(), "PasswordResetSubmitPage is not loaded");
+
 
         LinkedInSetNewPasswordPage linkedInSetNewPasswordPage = linkedInPasswordResetSubmitPage.navigateToLinkFromEmail();
-        Assert.assertTrue(linkedInSetNewPasswordPage.isLoaded(), "LinkedInSetNewPasswordPage is not loaded");
+             Assert.assertTrue(linkedInSetNewPasswordPage.isLoaded(), "page.LinkedInSetNewPasswordPage is not loaded");
 
         LinkedInSuccessfulResetPasswordPage linkedInSuccessfulResetPasswordPage = linkedInSetNewPasswordPage.confirmResetPassword("MirMer_111223", "MirMer_111223");
-            Assert.assertTrue(linkedInSuccessfulResetPasswordPage.isLoaded(), "Successful reset password page is not loaded");
+            Assert.assertTrue(linkedInSuccessfulResetPasswordPage.isLoaded(), "SuccessfulResetPasswordPage is not loaded");
 
         LinkedInHomePage linkedInHomePage=linkedInSuccessfulResetPasswordPage.returnToHomePage();
-            Assert.assertTrue(linkedInHomePage.isLoaded(), "Home page is not loaded");
+            Assert.assertTrue(linkedInHomePage.isLoaded(), "HomePage is not loaded");
     }
 }

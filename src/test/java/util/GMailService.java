@@ -39,8 +39,8 @@ public class GMailService {String host = "imap.gmail.com";
      * Default util.GMailService constructor with predefined user/pass credentials
      */
     public GMailService(){
-        this.user = "postoltest@gmail.com";
-        this.pass = "q12345678T";
+        this.user = "mf689799@gmail.com";
+        this.pass = "Miriam123";
     }
 
     /**
