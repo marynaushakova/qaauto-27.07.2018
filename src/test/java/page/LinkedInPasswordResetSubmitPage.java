@@ -16,6 +16,7 @@ public class LinkedInPasswordResetSubmitPage extends BasePage {
     public LinkedInPasswordResetSubmitPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(subtitleMessage,10);
     }
 
     public LinkedInSetNewPasswordPage navigateToLinkFromEmail() {

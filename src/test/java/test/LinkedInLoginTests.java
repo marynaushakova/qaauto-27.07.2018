@@ -1,42 +1,24 @@
 package test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import page.LinkedInHomePage;
-import page.LinkedInLoginPage;
 import page.LinkedInLoginSubmitPage;
 
-public class LinkedInLoginTests {
-    WebDriver browser;
-    LinkedInLoginPage linkedInLoginPage;
-
-    @BeforeMethod
-    public void beforeMethod() {
-        browser = new FirefoxDriver();
-        browser.get("https://www.linkedin.com/");
-        linkedInLoginPage = new LinkedInLoginPage(browser);
-    }
-
-    @AfterMethod
-    public void afterMethod() {browser.close();
-    }
+public class LinkedInLoginTests extends BaseTest{
 
     @DataProvider
     public Object[][] validFieldsCombination() {
         return new Object[][]{
-                {"mf689799@gmail.com", "Miriam123" },
-                //{"MF689799@gmail.com", "Miriam123" },
-                //{" mf689799@gmail.com", " Miriam123"}
+                {"mf689799@gmail.com", "MirMer1010" },
+                {"MF689799@gmail.com", "MirMer1010" },
+                {" mf689799@gmail.com", " MirMer1010"}
         };
     }
     @Test (dataProvider = "validFieldsCombination")
     public void successfulLoginTest(String userEmail, String userPass) {
-        LinkedInHomePage linkedInHomePage = linkedInLoginPage.loginReturnHomePage(userEmail, userPass);
+        LinkedInHomePage linkedInHomePage = linkedInLoginPage.login(userEmail, userPass);
         Assert.assertTrue(linkedInHomePage.isLoaded(), "Home page is not loaded");
     }
 
@@ -50,7 +32,7 @@ public class LinkedInLoginTests {
     }
     @Test (dataProvider = "emptyFieldsCombination")
     public void validateEmptyFieldsCombination(String userEmail, String userPass) {
-        linkedInLoginPage.loginReturnLoginPage(userEmail, userPass);
+        linkedInLoginPage.login(userEmail, userPass);
         Assert.assertTrue(linkedInLoginPage.isLoaded(),"User is not on login page.");
     }
 
@@ -68,7 +50,7 @@ public class LinkedInLoginTests {
     }
     @Test (dataProvider = "invalidUserEmailAndPasswordCombinations")
     public void validateWrongUserEmailAndPassword (String userEmail, String userPass, String userEmailValidationText, String userPasValidationText ){
-        LinkedInLoginSubmitPage linkedInLoginSubmitPage = linkedInLoginPage.loginReturnSubmitPage(userEmail,userPass);
+        LinkedInLoginSubmitPage linkedInLoginSubmitPage = linkedInLoginPage.login(userEmail,userPass);
         Assert.assertTrue(linkedInLoginSubmitPage.isLoaded(), "User is not on LoginSubmit page.");
 
         Assert.assertEquals(linkedInLoginSubmitPage.getAlertBoxText(),

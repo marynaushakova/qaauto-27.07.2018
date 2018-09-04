@@ -19,6 +19,7 @@ public class LinkedInHomePage extends BasePage {
     public LinkedInHomePage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(profileNavigationItem,10);
     }
 
     public boolean isLoaded() {

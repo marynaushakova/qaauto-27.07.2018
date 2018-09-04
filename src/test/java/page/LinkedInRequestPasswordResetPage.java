@@ -18,6 +18,7 @@ public class LinkedInRequestPasswordResetPage extends BasePage {
     public LinkedInRequestPasswordResetPage(WebDriver browser){
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(findAccountButton,10);
         }
     public LinkedInPasswordResetSubmitPage clickOnFindAccount(String userEmail) {
         gMailService.connect();

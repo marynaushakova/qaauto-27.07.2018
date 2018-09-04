@@ -20,6 +20,7 @@ public class LinkedInSetNewPasswordPage extends BasePage {
     public LinkedInSetNewPasswordPage(WebDriver browser){
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(newPasswordField,10);
     }
     public LinkedInSuccessfulResetPasswordPage confirmResetPassword (String newPassword, String confirmNewPassword) {
         newPasswordField.sendKeys(newPassword);

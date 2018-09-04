@@ -25,49 +25,48 @@ public class LinkedInLoginPage extends BasePage {
     private WebElement linkForgotPassword;
 
     /**
-     * Constructor of LinkedInLoginPage class.
+     * Parametrized constructor of LinkedInLoginPage class.
      * @param browser - WebDriver instance from test.
      */
     public LinkedInLoginPage (WebDriver browser){
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(signInButton,10);
     }
 
-    public LinkedInLoginSubmitPage loginReturnSubmitPage (String userEmail, String userPass){
-        userEmailField.sendKeys(userEmail);
-        userPassword.sendKeys(userPass);
-        signInButton.click ();
-        return new LinkedInLoginSubmitPage(browser);
-    }
-
-    public LinkedInHomePage loginReturnHomePage (String userEmail, String userPass) {
-        userEmailField.sendKeys(userEmail);
-        userPassword.sendKeys(userPass);
-        signInButton.click();
-        try {
-            sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new LinkedInHomePage(browser);
-    }
-
-    public LinkedInLoginPage loginReturnLoginPage (String userEmail, String userPass) {
-        userEmailField.sendKeys(userEmail);
-        userPassword.sendKeys(userPass);
-        signInButton.click();
-        try {
-            sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new LinkedInLoginPage(browser) ;
-    }
+    /**
+     * Method login, enters userEmail and UserPassword and click in SignIn button.
+     * @param userEmail - String with user email.
+     * @param userPass - String with user password.
+     * @param <T> - Generic type to return corresponding pageObject.
+     * @return either LinkedInLoginSubmitPage or LinkedInHomePage or LinkedInLoginPage pageObject.
+     */
+     public <T> T login (String userEmail, String userPass) {//generic type
+            userEmailField.sendKeys(userEmail);
+            userPassword.sendKeys(userPass);
+            signInButton.click();
+            if (getCurrentPageURL().contains("/feed")) {
+                return (T) new LinkedInHomePage(browser);
+            }
+            if (getCurrentPageURL().contains("/uas/login-submit")) {
+                return (T) new LinkedInLoginSubmitPage(browser);
+            } else {
+                return (T) this;//в явном виде return new LinkedInLoginPage;
+            }
+     }
+    /**
+     * clickOnForgotPasswordLink method, which implements the transition from LinkedInLoginPage to LinkedInLoginSubmitPage
+     * @return value of variable with LinkedInRequestPasswordResetPage type
+     */
     public LinkedInRequestPasswordResetPage clickOnForgotPasswordLink() {
         linkForgotPassword.click();
-        return new LinkedInRequestPasswordResetPage(browser) ;
+        return new LinkedInRequestPasswordResetPage(browser);
     }
 
+    /**
+     * isLoaded boolean method, implements validation of LinkedInLoginPage load
+     * @return true/false
+     */
     public boolean isLoaded() {
         return signInButton.isDisplayed()
                 && getCurrentPageTitle().contains("LinkedIn: Войти или зарегистрироваться")

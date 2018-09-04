@@ -12,6 +12,7 @@ public class LinkedInSuccessfulResetPasswordPage extends BasePage {
     public LinkedInSuccessfulResetPasswordPage (WebDriver browser){
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(returnToLoginPageButton,10);
     }
 
     public LinkedInHomePage returnToHomePage() {

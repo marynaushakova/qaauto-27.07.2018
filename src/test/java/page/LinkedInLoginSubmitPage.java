@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ *
+ */
 public class LinkedInLoginSubmitPage extends BasePage {
     @FindBy(xpath ="//*[@role='alert']" )
     private WebElement alertBox;
@@ -15,6 +18,9 @@ public class LinkedInLoginSubmitPage extends BasePage {
     @FindBy(xpath ="//*[@id='session_password-login-error']" )
     private WebElement userPasswordValidationText;
 
+    /**
+     * @param browser
+     */
     public LinkedInLoginSubmitPage(WebDriver browser){
         this.browser = browser;
         PageFactory.initElements(browser, this);
@@ -24,6 +30,10 @@ public class LinkedInLoginSubmitPage extends BasePage {
     public String getAlertBoxText() {
         return alertBox.getText();
     }
+
+    /**
+     * @return
+     */
     public boolean isLoaded() {
         return alertBox.isDisplayed()
                 && getCurrentPageTitle().contains("Войти в LinkedIn")

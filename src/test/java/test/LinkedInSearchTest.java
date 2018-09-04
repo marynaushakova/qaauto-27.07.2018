@@ -1,41 +1,29 @@
 package test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page.LinkedInHomePage;
-import page.LinkedInLoginPage;
 import page.LinkedInSearchPage;
 
-public class LinkedInSearchTest {
+import java.util.List;
 
-    WebDriver browser;
-    LinkedInLoginPage linkedInLoginPage;
+public class LinkedInSearchTest extends BaseTest{
 
-    @BeforeMethod
-    public void beforeMethod() {
-        browser = new FirefoxDriver();
-        browser.get("https://www.linkedin.com/");
-        linkedInLoginPage = new LinkedInLoginPage(browser);
-        Assert.assertTrue(linkedInLoginPage.isLoaded(), "Login page is not loaded");
+    @Test
+    public void linkedInFindHRTest() {
+        String searchTerm = "HR";
+        LinkedInHomePage linkedInHomePage = linkedInLoginPage.login("mf689799@gmail.com", "MirMer1010");
+        Assert.assertTrue(linkedInHomePage.isLoaded(), "Home page is not loaded");
+
+        LinkedInSearchPage linkedInSearchPage = linkedInHomePage.search("HR");
+        Assert.assertTrue(linkedInSearchPage.isLoaded(), "Search page is not loaded");
+        Assert.assertEquals(linkedInSearchPage.getSearchResultsCount(), 10, "Search results count is wrong");
+
+        List<String> searchResults = linkedInSearchPage.getSearchResultsList();
+        for (String searchResult : searchResults) {
+            Assert.assertTrue(searchResult.toLowerCase().contains(searchTerm.toLowerCase()), "searchTerm " + searchTerm + " not found in : \n" + searchResult);
+        }
     }
-
-    @AfterMethod
-    public void afterMethod() {browser.close();
-    }
-
-   @Test
-   public void linkedInFindHRTest () throws InterruptedException {
-       LinkedInHomePage linkedInHomePage = linkedInLoginPage.loginReturnHomePage("mf689799@gmail.com", "Miriam123");
-       Assert.assertTrue(linkedInHomePage.isLoaded(), "Home page is not loaded");
-
-       LinkedInSearchPage linkedInSearchPage = linkedInHomePage.search("HR");
-       Assert.assertTrue(linkedInSearchPage.isLoaded(), "Search page is not loaded");
-       Assert.assertEquals(linkedInSearchPage.getSearchResultsCount(), 10, "Search results count is wrong");
-       //Assert.assertEquals();
-   }
 }
+
 
