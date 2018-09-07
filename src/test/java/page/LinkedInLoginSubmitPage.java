@@ -35,9 +35,9 @@ public class LinkedInLoginSubmitPage extends BasePage {
      * @return
      */
     public boolean isLoaded() {
-        return alertBox.isDisplayed()
-                && getCurrentPageTitle().contains("Войти в LinkedIn")
-                && getCurrentPageURL().equals("https://www.linkedin.com/uas/login-submit");
+        return alertBox.isDisplayed();
+               // && getCurrentPageTitle().contains("Войти в LinkedIn")
+               // && getCurrentPageURL().equals("https://www.linkedin.com/uas/login-submit");
     }
 
     public String getUserEmailValidationText() {

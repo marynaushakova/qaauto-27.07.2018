@@ -12,8 +12,8 @@ public class LinkedInLoginTests extends BaseTest{
     public Object[][] validFieldsCombination() {
         return new Object[][]{
                 {"mf689799@gmail.com", "MirMer1010" },
-                {"MF689799@gmail.com", "MirMer1010" },
-                {" mf689799@gmail.com", " MirMer1010"}
+               // {"MF689799@gmail.com", "MirMer1010" },
+               // {" mf689799@gmail.com", " MirMer1010"}
         };
     }
     @Test (dataProvider = "validFieldsCombination")
@@ -26,8 +26,8 @@ public class LinkedInLoginTests extends BaseTest{
     public Object[][] emptyFieldsCombination() {
         return new Object[][]{
                 {"", "" },
-                {"", "P@ssword123" },
-                {"someone@domain.com", "" }
+               // {"", "P@ssword123" },
+               // {"someone@domain.com", "" }
         };
     }
     @Test (dataProvider = "emptyFieldsCombination")
@@ -40,12 +40,12 @@ public class LinkedInLoginTests extends BaseTest{
      public Object[][] invalidUserEmailAndPasswordCombinations() {
      return new Object[][]{
               {"a", "1", "Слишком короткий текст (минимальная длина – 3 симв., введено – 1 симв.).", "Пароль должен содержать не менее 6 символов."},
-              {"MF689799@GMAIL.COM", "MIRIAM123", "", "Это неверный пароль. Повторите попытку или измените пароль."},
-              {"1","1111111111111", "Обязательно включите в номер значок «+» и код своей страны.", ""},
-              {"qwertyuiop", "qwertyuiop", "Укажите действительный адрес эл. почты.", ""},
-              {"qwertyuiop@bla.bla", "qwertyuiop", "Этот адрес эл. почты не зарегистрирован в LinkedIn. Повторите попытку.", ""},
-              {"qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop", "qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop", "Слишком длинный текст: максимальная длина – 128 симв., введено 150 симв.", ""},
-              {"qwertyuiop@bla.bla","qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwerty", "","Пароль должен содержать не более 400 символов." }
+             // {"MF689799@GMAIL.COM", "MIRIAM123", "", "Это неверный пароль. Повторите попытку или измените пароль."},
+             // {"1","1111111111111", "Обязательно включите в номер значок «+» и код своей страны.", ""},
+             // {"qwertyuiop", "qwertyuiop", "Укажите действительный адрес эл. почты.", ""},
+             // {"qwertyuiop@bla.bla", "qwertyuiop", "Этот адрес эл. почты не зарегистрирован в LinkedIn. Повторите попытку.", ""},
+             // {"qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop", "qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop", "Слишком длинный текст: максимальная длина – 128 симв., введено 150 симв.", ""},
+             // {"qwertyuiop@bla.bla","qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwerty", "","Пароль должен содержать не более 400 символов." }
         };
     }
     @Test (dataProvider = "invalidUserEmailAndPasswordCombinations")

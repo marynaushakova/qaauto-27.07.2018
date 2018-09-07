@@ -31,6 +31,7 @@ public abstract class BasePage {
      * @return page title
      */
     public String getCurrentPageTitle() {
+
         return browser.getTitle();
     }
 

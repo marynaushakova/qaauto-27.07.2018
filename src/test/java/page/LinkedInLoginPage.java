@@ -51,7 +51,7 @@ public class LinkedInLoginPage extends BasePage {
             if (getCurrentPageURL().contains("/uas/login-submit")) {
                 return (T) new LinkedInLoginSubmitPage(browser);
             } else {
-                return (T) this;//в явном виде return new LinkedInLoginPage;
+                return (T) new LinkedInLoginPage(browser);
             }
      }
     /**
@@ -68,8 +68,8 @@ public class LinkedInLoginPage extends BasePage {
      * @return true/false
      */
     public boolean isLoaded() {
-        return signInButton.isDisplayed()
-                && getCurrentPageTitle().contains("LinkedIn: Войти или зарегистрироваться")
-                && getCurrentPageURL().equals("https://www.linkedin.com/");
+        return signInButton.isDisplayed();
+               //&& getCurrentPageTitle().contains("LinkedIn: Войти или зарегистрироваться");
+             //   && getCurrentPageURL().equals("https://www.linkedin.com/");
     }
 }
