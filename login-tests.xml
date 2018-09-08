@@ -1,46 +1,35 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="LoginTestSuite" verbose="1" >
-    <test name="LoginTests_Chrome_EnglishLocale" >
+    <test name="LoginTests_Chrome_GermanyLocale" >
         <parameter name="browserName" value="Chrome"/>
-        <parameter name="envURL" value="https://ua.linkedin.com/"/>
-               <classes>
-            <class name="test.LinkedInLoginTests" />
+        <parameter name="envURL" value="https://de.linkedin.com"/>
+        <classes>
+            <class name="test.LinkedInLoginTestsValidDateAndEmptyFields" />
+            <class name="test.LinkedInNegativeLoginTestsGermanLocale" />
         </classes>
     </test>
-    <test name="LoginTests_Chrome_GermanLocale" >
-        <parameter name="browserName" value="Chrome"/>
-        <parameter name="envURL" value="https://de.linkedin.com/"/>
+    <test name="LoginTests_Firefox_DefaultLocale" >
+        <parameter name="browserName" value="FireFox"/>
         <classes>
-            <class name="test.LinkedInLoginTests" />
+            <class name="test.LinkedInLoginTestsValidDateAndEmptyFields" />
+            <class name="test.LinkedInNegativeLoginTestsDefaultLocale" />
         </classes>
     </test>
-    <test name="LoginTests_Chrome_RussianLocale" >
-        <parameter name="browserName" value="Chrome"/>
-        <parameter name="envURL" value="https://ru.linkedin.com/"/>
+    <test name="LoginTests_DefaultBrowser_GermanyLocale" >
+        <parameter name="envURL" value="https://de.linkedin.com"/>
         <classes>
-            <class name="test.LinkedInLoginTests" />
+            <class name="test.LinkedInLoginTestsValidDateAndEmptyFields" />
+            <class name="test.LinkedInNegativeLoginTestsGermanLocale" />
         </classes>
     </test>
-    <test name="LoginTests_Firefox_EnglishLocale" >
-        <parameter name="browserName" value="firefox"/>
-        <parameter name="envURL" value="https://ua.linkedin.com/"/>
+    <test name="LoginTests_Chrome_DefaultLocale" >
+        <parameter name="browserName" value="CHRome"/>
         <classes>
-            <class name="test.LinkedInLoginTests" />
-        </classes>
-    </test>
-    <test name="LoginTests_Firefox_GermanLocale" >
-        <parameter name="browserName" value="firefox"/>
-        <parameter name="envURL" value="https://de.linkedin.com/"/>
-        <classes>
-            <class name="test.LinkedInLoginTests" />
-        </classes>
-    </test>
-    <test name="LoginTests_Firefox_RussianLocale" >
-        <parameter name="browserName" value="firefox"/>
-        <parameter name="envURL" value="https://ru.linkedin.com/"/>
-        <classes>
-            <class name="test.LinkedInLoginTests" />
+            <class name="test.LinkedInLoginTestsValidDateAndEmptyFields" />
+            <class name="test.LinkedInNegativeLoginTestsDefaultLocale" />
         </classes>
     </test>
 </suite>
+
+

@@ -62,14 +62,13 @@ public class LinkedInLoginPage extends BasePage {
         linkForgotPassword.click();
         return new LinkedInRequestPasswordResetPage(browser);
     }
-
     /**
      * isLoaded boolean method, implements validation of LinkedInLoginPage load
      * @return true/false
      */
     public boolean isLoaded() {
-        return signInButton.isDisplayed();
-               //&& getCurrentPageTitle().contains("LinkedIn: Войти или зарегистрироваться");
-             //   && getCurrentPageURL().equals("https://www.linkedin.com/");
+            return signInButton.isDisplayed()
+                    && getCurrentPageTitle().contains("LinkedIn")
+                    && getCurrentPageURL().contains("linkedin.com");
     }
 }

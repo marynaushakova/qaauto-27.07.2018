@@ -15,7 +15,7 @@ public class BaseTest {
 
     @Parameters({"browserName", "envURL" })
     @BeforeMethod
-    public void beforeMethod(@Optional ("firefox") String browserName, @Optional ("https://ua.linkedin.com/") String envURL) {
+    public void beforeMethod(@Optional ("firefox") String browserName, @Optional ("https://linkedin.com/") String envURL) {
         if (browserName.toLowerCase().equals("firefox")){
             browser = new FirefoxDriver();
         }
@@ -23,7 +23,7 @@ public class BaseTest {
             System.setProperty("webdriver.chrome.driver","C:\\Temp\\chromedriver.exe");
             browser = new ChromeDriver();
         }
-          else {
+        else {
             try {
                 throw new Exception("browserName "+browserName+" is  not supported");
             } catch (Exception e) {
@@ -33,7 +33,7 @@ public class BaseTest {
         browser.get(envURL);
         linkedInLoginPage = new LinkedInLoginPage(browser);
     }
-    @AfterMethod
-    public void afterMethod() {browser.close();
-    }
+ //   @AfterMethod
+  //  public void afterMethod() {browser.close();
+ //   }
 }

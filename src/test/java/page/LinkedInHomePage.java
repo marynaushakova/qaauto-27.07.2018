@@ -23,9 +23,9 @@ public class LinkedInHomePage extends BasePage {
     }
 
     public boolean isLoaded() {
-        return profileNavigationItem.isDisplayed();
-               // && getCurrentPageTitle().contains("LinkedIn")
-                //&& getCurrentPageURL().equals("https://www.linkedin.com/feed/");
+        return profileNavigationItem.isDisplayed()
+               && getCurrentPageTitle().contains("LinkedIn")
+               && getCurrentPageURL().contains("linkedin.com/feed/");
     }
 
     public LinkedInSearchPage search(String searchTerm) {
